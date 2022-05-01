@@ -62,7 +62,7 @@
         </h2>
       {{ page.desc | markdownify }}
       <h3 class="f6 fw5 mt4">Example</h3>
-      {% highlight bash %}curl {{ site.api_endpoint }}{{ page.endpoint }}{% endhighlight %}
+      {% highlight bash %}curl {% if page.method == "post" %}-d "{{ page.payload }}" -X POST {% endif %}{{ site.api_endpoint }}{{ page.endpoint }}{% endhighlight %}
       <h3 class="f6 fw5 mt4">Response</h3>
       {% highlight bash %}Status: {{ page.response_code }}
 {{ page.response_text }}{% endhighlight %}
