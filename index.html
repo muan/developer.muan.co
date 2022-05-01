@@ -1,0 +1,102 @@
+---
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API reference</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;500&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body, code { font-family: 'IBM Plex Mono', monospace; font-weight: 300; }
+    pre { overflow: auto; }
+    figure { margin: 0; margin-left: 1em; }
+    hr { border: 0;  border-bottom: 1px solid }
+    /* lol */
+    #content:not(:has(:target)) + #to-top { display: none !important; }
+
+    @media (prefers-color-scheme: dark) {
+      .black { color: #dbdfdf; }
+      .white { color: #dbdfdf; }
+      .dark-blue { color: #08c }
+      .bg-white { background-color: #1b1c1b; }
+      .bg-black, .bg-near-white { background-color: #1f2020;}
+      .b--black, hr { border-color: #2b2c2b;}
+    }
+  </style>
+</head>
+<body class="pa3 ma0 f6 bg-white black">
+  
+<header class="mb5 mw8 center">
+  <h1 class="f6 fw3 bb tc pb3 b--black mt0">
+    <!-- <span class="dib pv1 ph2 bg-black white mr2 ttu">&nbsp;</span> -->
+    MU/AN API
+  </h1>
+</header>
+
+<div class="flex items-start flex-wrap flex-nowrap-ns mw8 center" style="gap: 2em" id="content">
+  <nav aria-label="Endpoints" class="w5-ns w-100">
+    <ol class="ma0 pl4" style="list-style: decimal-leading-zero;">
+    {% for page in site.docs %}
+      <li><a href="#{{ page.endpoint | slugify }}" class="db mb3 link hover-blue underline dark-blue">
+        {{ page.method | upcase }} {{ page.endpoint }}
+      </a></li>
+    {% endfor %}
+    <li><a href="#codes" class="db mb3 mt4 link hover-blue underline dark-blue">
+      Status codes
+    </a></li>
+    </ol>
+    <hr class="mv5 db dn-ns">
+  </nav>
+
+  <main class="flex-auto">
+    {% for page in site.docs %}
+      <h2 class="f6 fw5 lh-solid mt0 mb3" id="{{ page.endpoint | slugify }}">
+        <span class="dib pv1 ph3 bg-black white mr2 ttu">{{ page.method }}</span>
+        {{ page.endpoint }}
+        </h2>
+      {{ page.desc | markdownify }}
+      <h3 class="f6 fw5 mt4">Example</h3>
+      {% highlight bash %}curl {{ site.api_endpoint }}{{ page.endpoint }}{% endhighlight %}
+      <h3 class="f6 fw5 mt4">Response</h3>
+      {% highlight bash %}Status: {{ page.response_code }}
+{{ page.response_text }}{% endhighlight %}
+      <hr class="mv5">
+    {% endfor %}
+
+    <h2 class="f6 fw5 lh-solid mt0 mb3" id="codes">
+      <span class="dib pv1 ph1 bg-black white mr2 ttu">&nbsp;</span>
+      Status codes
+    </h2>
+    <div class="overflow-auto mb4 bg-near-white nl3 nr3">
+      <div class="pa3">
+        <table class="f6 w-100" cellspacing="0">
+          <thead>
+            <tr>
+              <th class="fw5 bb b--black-20 tl pb3 pr3 nowrap" width="1%">HTTP Status Code</th>
+              <th class="fw5 bb b--black-20 tl pb3 pr3">Description</th>
+            </tr>
+          </thead>
+          <tbody class="lh-copy">
+            {% for pair in site.codes %}
+              <tr>
+                <td class="pv3 pr3 bb b--black-20">{{ pair.code }}</td>
+                <td class="pv3 pr3 bb b--black-20">{{ pair.desc }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<a id="to-top" href="#" class="fixed bottom-0 right-0 white pa4 center db">#</div>
+
+</body>
+</html>
