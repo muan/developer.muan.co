@@ -47,9 +47,6 @@
         {{ page.method | upcase }} {{ page.endpoint }}
       </a></li>
     {% endfor %}
-    <li><a href="#codes" class="db mb3 mt4 link hover-blue underline dark-blue">
-      Status codes
-    </a></li>
     </ol>
     <hr class="mv5 db dn-ns">
   </nav>
@@ -68,31 +65,6 @@
 {{ page.response_text }}{% endhighlight %}
       <hr class="mv5">
     {% endfor %}
-
-    <h2 class="f6 fw5 lh-solid mt0 mb3" id="codes">
-      <span class="dib pv1 ph1 bg-black white mr2 ttu">&nbsp;</span>
-      Status codes
-    </h2>
-    <div class="overflow-auto mb4 bg-near-white nl3 nr3">
-      <div class="pa3">
-        <table class="f6 w-100" cellspacing="0">
-          <thead>
-            <tr>
-              <th class="fw5 bb b--black-20 tl pb3 pr3 nowrap" width="1%">HTTP Status Code</th>
-              <th class="fw5 bb b--black-20 tl pb3 pr3">Description</th>
-            </tr>
-          </thead>
-          <tbody class="lh-copy">
-            {% for pair in site.codes %}
-              <tr>
-                <td class="pv3 pr3 bb b--black-20">{{ pair.code }}</td>
-                <td class="pv3 pr3 bb b--black-20">{{ pair.desc }}</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
   </main>
 </div>
 

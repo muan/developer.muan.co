@@ -1,12 +1,3 @@
 collections:
   - docs
 api_endpoint: https://api.muan.co/v1
-codes:
-  - code: 200
-    desc: OK
-  - code: 417
-    desc: Expectation failed
-  - code: 425
-    desc: Too early
-  - code: 500
-    desc: Internal server error
